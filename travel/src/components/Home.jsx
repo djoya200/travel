@@ -9,16 +9,22 @@ class Home extends Component {
             tempF: " ",
         }
     }
+    handleChange = (event) => {
+        event.preventDefault();
+        console.log(this.state.input)
+        this.setState({
+            input: event.target.value
+        })
+    }
     componentDidMount() {
         console.log("I mounted!!!")
         this.callWeather()
     }
-    callWeather = async () => {
-
+    callWeather = async (event) => {
+        // event.preventDefault();
         console.log("weather for city called")
         const query = this.state.input
         const url = `http://api.weatherapi.com/v1/current.json?key=5b38460b0d054bb883c40944212506&q=${query}&`
-
         try {
             const response = await fetch(url);
             const data = await response.json();
@@ -32,14 +38,7 @@ class Home extends Component {
             console.log("There was an error")
         }
     }
-    handleChange = (event) => {
-        event.preventDefault();
-        console.log(this.state.input)
-        this.setState({
-            input: event.target.value
-        })
 
-    }
 
     render() {
         return (
