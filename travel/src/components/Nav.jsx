@@ -6,7 +6,7 @@ function Nav( ) {
     return (
         <div>
         <nav>
-            <ul>
+            <ul className="navStyle">
                 <Link to="/home">
                     <li>Home</li>
                 </Link>

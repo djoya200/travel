@@ -11,3 +11,13 @@ class EditDestination extends Component {
 }
 
 export default EditDestination;
+
+// deleteCartItem(id){
+//     axios.delete(`http://localhost:8000/cart/${id}`)
+//     }
+//         updateCartItem(){
+//             console.log("Working")
+//             this.setState({
+//                 timeToUpdate:true
+//             })
+//         }
