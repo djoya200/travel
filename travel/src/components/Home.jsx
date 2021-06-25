@@ -17,7 +17,7 @@ class Home extends Component {
 
         console.log("weather for city called")
         const query = this.state.input
-        const url = `http://api.weatherapi.com/v1/current.json?key=5b38460b0d054bb883c40944212506&q=${query}&aqi=no`
+        const url = `http://api.weatherapi.com/v1/current.json?key=5b38460b0d054bb883c40944212506&q=${query}&`
 
         try {
             const response = await fetch(url);
