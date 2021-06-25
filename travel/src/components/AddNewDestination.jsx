@@ -18,18 +18,22 @@ class AddNewDestination extends Component {
         })
         console.log(event.target.name)
     }
+    // window.location.reload(false)
     submitInfo = (event) => {
         event.preventDefault();
-        window.location.reload(false)
+    
         const newDest ={
             name: this.state.name,
             dates: this.state.dates,
-            thingsToDo: this.state.thingsToDo
+            thingstodo: this.state.thingsToDo
         }
+        console.log(newDest);
         axios.post("http://localhost:8080/travel", newDest)
         .then(res => {
             console.log(res);
             console.log(res.newDest);
+        }).catch((err)=>{
+            console.log('err ', err)
         })
     }
     render() {
