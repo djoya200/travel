@@ -30,7 +30,10 @@ class ListOfDestinations extends Component {
     }
     editThisDestination = (passedIndex) => {
         // if index in state == form index passed take form data and post it to DB
-
+        // var indexInQuestion = passedIndex.id
+        // this.setState({
+        //     theIndexToEdit: indexInQuestion
+        // })
         if (passedIndex === this.state.theIndexToEdit) {
             this.setState({
                 seeMore: false,
@@ -43,7 +46,7 @@ class ListOfDestinations extends Component {
                 theIndexToEdit: passedIndex
             })
         }
-
+        // console.log(passedIndex)
     }
     handleChange = (event) => {
         event.preventDefault();
@@ -54,7 +57,7 @@ class ListOfDestinations extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="destinationBigContainer">
                 <h1>Destination Wish List</h1>
                 {this.state.timeToUpdate ? this.updateTravelItem(this.state.travelItems) : null}
                 <table>
@@ -65,7 +68,7 @@ class ListOfDestinations extends Component {
                             <td>Things To Do</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <div>
                         {
                             this.state.travelItems.map(
                                 travelItem =>
@@ -100,7 +103,7 @@ class ListOfDestinations extends Component {
                                     </div>
                             )
                         }
-                    </tbody>
+                    </div>
                 </table>
 
             </div>

@@ -4,7 +4,8 @@ class Title extends Component {
     render() {
         return (
             <div>
-                <text> Im the websites title!</text>
+                {/* <text > That Place </text> */}
+                <h1 className="title">That Place</h1>
             </div>
         );
     }
