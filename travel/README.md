@@ -10,3 +10,7 @@ You can search for weather information for any destination that you have saved o
 
 In the future this app will also include a way to search for a new travel destination. 
 Have the ability to look at flights and pricing informtion with different airlines. 
+
+#### What this app includes
+That Place is run on the front end with a React app, on the backend with Springboot, JAVA, and Mavin. 
+Weater API is from weatherapi.com
