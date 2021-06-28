@@ -28,22 +28,35 @@ class ListOfDestinations extends Component {
         console.log('Clicked show edit page for: ' + ID)
 
     }
-    editThisDestination = (passedIndex) => {
+    editThisDestination = (passedIndex, travelObject) => {
+        console.log('clicked edit')
+        console.log(passedIndex)
+        console.log(travelObject)
         // if index in state == form index passed take form data and post it to DB
-        // var indexInQuestion = passedIndex.id
+        // var indexInQuestion = travelObject.id
         // this.setState({
         //     theIndexToEdit: indexInQuestion
         // })
+
         if (passedIndex === this.state.theIndexToEdit) {
+            console.log('edit IF IF IF ')
             this.setState({
                 seeMore: false,
-                theIndexToEdit: ''
+                theIndexToEdit: '',
+                name: "",
+                dates: "",
+                thingsToDo: "",
             })
+            // push to axios call funx to 
 
         } else {
+            console.log('edit ELSE ELSE ELSE ')
             this.setState({
                 seeMore: true,
-                theIndexToEdit: passedIndex
+                theIndexToEdit: passedIndex,
+                name: travelObject.name,
+                dates: travelObject.dates,
+                thingsToDo: travelObject.thingsToDo,
             })
         }
         // console.log(passedIndex)
@@ -71,18 +84,18 @@ class ListOfDestinations extends Component {
                     <div>
                         {
                             this.state.travelItems.map(
-                                travelItem =>
+                               ( travelItem, index )=>
                                     <div>
                                         <tr key={travelItem.id}>
                                             <td>{travelItem.name}</td>
                                             <td>{travelItem.dates}</td>
                                             <td>{travelItem.thingstodo}</td>
                                         </tr>
-                                        <button className='seeMore' onClick={() => { this.editThisDestination(travelItem) }}>{this.state.seeMore ? this.state.theIndexToEdit === travelItem ? 'Save' : 'Edit ✎' : 'Edit ✎'}</button>
+                                        <button className='seeMore' onClick={() => { this.editThisDestination(index, travelItem) }}>{this.state.seeMore ? this.state.theIndexToEdit === index ? 'Save' : 'Edit ✎' : 'Edit ✎'}</button>
                                         {/* <button onClick={()=>{this.showEditPage(travelItem.id)}}>✎</button> */}
                                         {this.state.seeMore
                                             ?
-                                            this.state.theIndexToEdit === travelItem
+                                            this.state.theIndexToEdit === index
                                                 ?
                                                 <div>
                                                     <text>form and DELETE button....</text>
