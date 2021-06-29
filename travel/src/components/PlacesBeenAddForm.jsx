@@ -8,7 +8,7 @@ class PlacesBeenAddForm extends Component {
             placesItems: [],
             name: " ",
             dates: " ",
-            thingsdone: " ",
+            whattheydid: " ",
         }
     }
     handleChange = (event) => {
@@ -24,8 +24,8 @@ class PlacesBeenAddForm extends Component {
     
         const newDest ={
             name: this.state.name,
-            dates: this.state.dates,
-            thingsdone: this.state.thingsdone
+            dates: parseInt(this.state.dates),
+            whattheydid: this.state.whattheydid
         }
         console.log(newDest);
         axios.post("http://localhost:8080/places", newDest)
@@ -43,7 +43,7 @@ class PlacesBeenAddForm extends Component {
         this.setState({
             name: " ",
             dates: " ",
-            thingsdone: " "
+            whattheydid: " "
         })
         window.location.reload(false)
         console.log(this.state)

@@ -14,7 +14,7 @@ class PlacesBeen extends Component {
             id: '',
             name: " ",
             dates: " ",
-            thingsdone: " ",
+            whattheydid: " ",
         }
     }
 
@@ -31,7 +31,7 @@ class PlacesBeen extends Component {
             id: placesObject.id,
             name: placesObject.name,
             dates: placesObject.dates,
-            thingsdone: placesObject.thingsdone,
+            whattheydid: placesObject.whattheydid,
         })
 
         // console.log(passedIndex)
@@ -42,7 +42,7 @@ class PlacesBeen extends Component {
             id: this.state.id,
             name: this.state.name,
             dates: parseInt(this.state.dates),
-            thingsdone: this.state.thingsdone
+            whattheydid: this.state.whattheydid
         }
         console.log(placesObj)
         axios.put(`http://localhost:8080/places`, placesObj).then((res) => {
@@ -53,7 +53,7 @@ class PlacesBeen extends Component {
                 theIndexToEdit: '',
                 name: "",
                 dates: "",
-                thingsdone: "",
+                whattheydid: "",
             })
         }).catch((e) => { console.log(e) })
     }
