@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AddNewDestination from './AddNewDestination';
 import DestinationListService from "../services/DestinationListService";
-import EditDestination from './EditDestination'
+// import EditDestination from './EditDestination'
 import axios from 'axios';
 
 class ListOfDestinations extends Component {
@@ -12,31 +12,44 @@ class ListOfDestinations extends Component {
             timeToUpdate: false,
             seeMore: false,
             theIndexToEdit: '',
+            id: '',
             name: " ",
             dates: " ",
-            thingsToDo: " ",
+            thingstodo: " ",
         }
     }
-    // get data from api
 
-    componentDidMount() {
-        DestinationListService.getTravelItem().then((response) => {
-            this.setState({
-                travelItems: response.data
-            })
-        })
-    }
+
     showEditPage = (ID) => {
         console.log('Clicked show edit page for: ' + ID)
 
     }
     editThisDestination = (passedIndex, travelObject) => {
-        console.log('clicked edit')
-        console.log(passedIndex)
-        console.log(travelObject)
 
-        if (passedIndex === this.state.theIndexToEdit) {
-            console.log('edit IF IF IF ')
+        console.log('edit ELSE ELSE ELSE ')
+        this.setState({
+            seeMore: true,
+            theIndexToEdit: passedIndex,
+            id: travelObject.id,
+            name: travelObject.name,
+            dates: travelObject.dates,
+            thingstodo: travelObject.thingstodo,
+        })
+
+        // console.log(passedIndex)
+    }
+    pushToDatabase = (event) => {
+        event.preventDefault();
+        let travelObj = {
+            id: this.state.id,
+            name: this.state.name,
+            dates: parseInt(this.state.dates),
+            thingstodo: this.state.thingstodo
+        }
+        console.log(travelObj)
+        axios.patch(`http://localhost:8080/travel/${this.state.id}`, travelObj).then((res) => {
+            console.log(res)
+
             this.setState({
                 seeMore: false,
                 theIndexToEdit: '',
@@ -44,20 +57,14 @@ class ListOfDestinations extends Component {
                 dates: "",
                 thingsToDo: "",
             })
-            // push to axios call funx to 
-            axios.patch("http://localhost:8080/travel", )
+        }).catch((e) => { console.log(e) })
+    }
+    deleteFromDatabase = () => {
+        console.log('clicked delete')
+        axios.delete(`http://localhost:8080/travel/${this.state.id}`).then((res) => {
+            console.log(res)
 
-        } else {
-            console.log('edit ELSE ELSE ELSE ')
-            this.setState({
-                seeMore: true,
-                theIndexToEdit: passedIndex,
-                name: travelObject.name,
-                dates: travelObject.dates,
-                thingsToDo: travelObject.thingsToDo,
-            })
-        }
-        // console.log(passedIndex)
+        }).catch((e) => { console.log(e) })
     }
     handleChange = (event) => {
         event.preventDefault();
@@ -65,11 +72,20 @@ class ListOfDestinations extends Component {
             [event.target.name]: event.target.value
         })
         console.log(event.target.name)
+        console.log(event.target.value)
+    }
+    componentDidMount() {
+        DestinationListService.getTravelItem().then((response) => {
+            this.setState({
+                travelItems: response.data
+            })
+        })
     }
     render() {
         return (
             <div className="destinationBigContainer">
                 <h1>Destination Wish List</h1>
+                {/* <AddNewDestination /> */}
                 {this.state.timeToUpdate ? this.updateTravelItem(this.state.travelItems) : null}
                 <table>
                     <thead>
@@ -82,29 +98,36 @@ class ListOfDestinations extends Component {
                     <div>
                         {
                             this.state.travelItems.map(
-                               ( travelItem, index )=>
-                                    <div>
+                                (travelItem, index) =>
+                                    <div key={index}>
                                         <tr key={travelItem.id}>
                                             <td>{travelItem.name}</td>
                                             <td>{travelItem.dates}</td>
                                             <td>{travelItem.thingstodo}</td>
                                         </tr>
-                                        <button className='seeMore' onClick={() => { this.editThisDestination(index, travelItem) }}>{this.state.seeMore ? this.state.theIndexToEdit === index ? 'Save' : 'Edit ✎' : 'Edit ✎'}</button>
+                                        {this.state.seeMore === false ?
+                                            <button className='seeMore' onClick={() => { this.editThisDestination(index, travelItem) }}>{this.state.seeMore ? this.state.theIndexToEdit === index ? 'Save' : 'Edit' : 'Edit ✎'}</button>
+
+                                            : null}
+
                                         {/* <button onClick={()=>{this.showEditPage(travelItem.id)}}>✎</button> */}
                                         {this.state.seeMore
                                             ?
                                             this.state.theIndexToEdit === index
                                                 ?
                                                 <div>
-                                                    <text>form and DELETE button....</text>
-                                                    <form >
+                                                    
+                                                    <form  onSubmit={this.pushToDatabase}>
                                                         <label>
                                                             <input typeof="text" name='name' onChange={this.handleChange} placeholder={travelItem.name} required />
                                                             <input typeof="text" name='dates' onChange={this.handleChange} placeholder="Possible Dates" />
-                                                            <input typeof="text" name='thingsToDo' onChange={this.handleChange} placeholder="Fun Things To Do" required />
+                                                            <input typeof="text" name='thingstodo' onChange={this.handleChange} placeholder="Fun Things To Do" required />
+                                                            <button typeof='submit'>Save</button>
                                                         </label>
 
                                                     </form>
+                                                    <button onClick={this.deleteFromDatabase}>Delete</button>
+                                                    
                                                 </div>
                                                 :
                                                 null

@@ -31,10 +31,22 @@ class AddNewDestination extends Component {
         axios.post("http://localhost:8080/travel", newDest)
         .then(res => {
             console.log(res);
-            console.log(res.newDest);
+            // console.log(res.newDest);
+            window.alert("Great, we have saved this to your Future Destinations!");
+            this.clearForm()
         }).catch((err)=>{
             console.log('err ', err)
         })
+    }
+    clearForm = () => {
+        console.log("this clear form called")
+        this.setState({
+            name: " ",
+            dates: " ",
+            thingstodo: " "
+        })
+        window.location.reload(false)
+        console.log(this.state)
     }
     render() {
         return (
