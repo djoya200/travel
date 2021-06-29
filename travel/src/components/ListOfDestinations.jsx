@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import AddNewDestination from './AddNewDestination';
 import DestinationListService from "../services/DestinationListService";
 import EditDestination from './EditDestination'
+import axios from 'axios';
+
 class ListOfDestinations extends Component {
     constructor() {
         super()
@@ -32,11 +34,6 @@ class ListOfDestinations extends Component {
         console.log('clicked edit')
         console.log(passedIndex)
         console.log(travelObject)
-        // if index in state == form index passed take form data and post it to DB
-        // var indexInQuestion = travelObject.id
-        // this.setState({
-        //     theIndexToEdit: indexInQuestion
-        // })
 
         if (passedIndex === this.state.theIndexToEdit) {
             console.log('edit IF IF IF ')
@@ -48,6 +45,7 @@ class ListOfDestinations extends Component {
                 thingsToDo: "",
             })
             // push to axios call funx to 
+            axios.patch("http://localhost:8080/travel", )
 
         } else {
             console.log('edit ELSE ELSE ELSE ')

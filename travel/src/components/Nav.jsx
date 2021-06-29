@@ -16,6 +16,9 @@ function Nav( ) {
                 <Link to="/futureDestinations">
                     <li>Future Destinations</li>
                 </Link>
+                <Link to="/placesbeen">
+                    <li>Places I've Been</li>
+                </Link>
                 {/* We dont need this here because we are gonne 
                 get to it from a button on the list of dest, so 
                 we know which one to edit. 

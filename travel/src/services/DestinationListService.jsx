@@ -6,13 +6,16 @@ class DestinationListService {
         return axios.get(TRAVEL_URL)
     }
     postTravelItem(){
-        
+
     }
     deleteTravelItem(){
 
     }
     editTravelItem(){
 
+    }
+    patchTravelItem(){
+        
     }
 }
 

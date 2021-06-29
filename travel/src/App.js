@@ -6,7 +6,8 @@ import Nav from './components/Nav'
 import Home from './components/Home'
 import ListOfDestinations from './components/ListOfDestinations'
 import AddNewDestination from './components/AddNewDestination'
-import EditDestination from './components/EditDestination'
+import PlacesBeen from './components/PlacesBeen';
+
 function App() {
   return (
     <Router>
@@ -17,7 +18,7 @@ function App() {
           <Route path="/home" exact component={Home} />
           <Route path="/newDestination" component={AddNewDestination} />
           <Route path="/futureDestinations" component={ListOfDestinations} />
-          <Route path="/editDestination" component={EditDestination} />
+          <Route path="/placesbeen" component={PlacesBeen} />
         </Switch>
       </div>
     </Router>
