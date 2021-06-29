@@ -47,7 +47,7 @@ class ListOfDestinations extends Component {
             thingstodo: this.state.thingstodo
         }
         console.log(travelObj)
-        axios.patch(`http://localhost:8080/travel/${this.state.id}`, travelObj).then((res) => {
+        axios.put(`http://localhost:8080/travel`, travelObj).then((res) => {
             console.log(res)
 
             this.setState({
@@ -55,7 +55,7 @@ class ListOfDestinations extends Component {
                 theIndexToEdit: '',
                 name: "",
                 dates: "",
-                thingsToDo: "",
+                thingstodo: "",
             })
         }).catch((e) => { console.log(e) })
     }
