@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component }  from 'react';
 import axios from 'axios';
 
 class PlacesBeenAddForm extends Component {
@@ -59,7 +59,8 @@ class PlacesBeenAddForm extends Component {
                     </label>
                     <button typeof='submit'>Add Past Location</button>
                 </form>
-            </div>
+            </div> 
+
         );
     }
 }
